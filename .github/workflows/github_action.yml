@@ -1,1 +1,30 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 
+name: Decouverte GitHub Action
+
+on: [push]
+
+jobs:
+  build:
+    name: FirstBuildJob
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install NPM
+    - run: npm install
+    
+    - name: Install NPM
+    - run: npm run build --if-present
